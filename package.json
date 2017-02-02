@@ -1,0 +1,26 @@
+{
+  "name": "colisee-visapi",
+  "version": "0.0.1",
+  "description": "Micro-service responsible for providing endpoints to the Visualizer",
+  "main": "src/main.js",
+  "scripts": {
+    "quick-start": "node src/main.js",
+    "prestart": "npm run build",
+    "start": "npm run quick-start",
+    "build": "tsc",
+    "setup": "npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/russleyshaw/colisee-visapi.git"
+  },
+  "author": "siggame",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/russleyshaw/colisee-visapi/issues"
+  },
+  "homepage": "https://github.com/russleyshaw/colisee-visapi#readme",
+  "devDependencies": {
+    "typescript": "^2.1.5"
+  }
+}
