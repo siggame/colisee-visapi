@@ -1,5 +1,5 @@
 import * as knexModule from "knex";
-// const _ = require('lodash'); // not sure if needed for visapi
+const _ = require('lodash');
 
 /** @module dbUtil */
 
@@ -17,17 +17,6 @@ export const query = knexModule({
     },
     debug: _.defaultTo(process.env.POSTGRES_DEBUG, false)
 });
-
-/**
- * getGame
- */
-export function getRecentGame(): Promise<any> {
-    return new Promise((res, rej)=>{
-        
-    });
-
-}
-
 
 /**
  * createGame

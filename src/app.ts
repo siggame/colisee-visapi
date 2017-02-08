@@ -22,9 +22,16 @@ export class App {
         clearInterval(this.intervalId);
     }
 
+    // bytea is the gamelog type in the db, can change later
+    getRecentGame(num: number): Promise<bytea> {
+      return new Promise((resolve, reject) => {
+          db.query('game').where('visualized', false).orderBy('modified_time').desc().limit(num)
+              .then()
+              ;
+      });
+    }
+
     /**
-     * Get random teams
-     */
     randomTeams(num: number): Promise<number[]> {
         return new Promise((resolve, reject) => {
             db.query('team').orderByRaw(db.query.raw('RANDOM()')).limit(num)
@@ -36,7 +43,7 @@ export class App {
 
     /**
      * 
-     */
+     *
     scheduledNum(): Promise<number> {
         return new Promise((resolve, reject) => {
             db.query('game').where('status', 'scheduled').count('* AS cnt')
@@ -50,7 +57,7 @@ export class App {
     
     /**
      * 
-     */
+     *
     poll(): Promise<void> {
         return this.scheduledNum()
             .then(()=>this.randomTeams(2))
@@ -60,3 +67,10 @@ export class App {
 }
 
 
+/**
+
+function getOneGames() {
+  games = db.query('game').where('visualized', false).orderBy('modified_time').desc().limit(20);
+}
+
+*/
