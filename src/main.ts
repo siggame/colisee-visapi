@@ -1,3 +1,5 @@
+import { App } from "./app";
 
-const msg: string = "Hello, World!";
-console.log(msg);
+let app = new App();
+
+app.start();
