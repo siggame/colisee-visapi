@@ -31,7 +31,6 @@ export class App {
       });
     }
 
-    /**
     randomTeams(num: number): Promise<number[]> {
         return new Promise((resolve, reject) => {
             db.query('team').orderByRaw(db.query.raw('RANDOM()')).limit(num)
@@ -43,7 +42,7 @@ export class App {
 
     /**
      * 
-     *
+     */
     scheduledNum(): Promise<number> {
         return new Promise((resolve, reject) => {
             db.query('game').where('status', 'scheduled').count('* AS cnt')
@@ -57,7 +56,7 @@ export class App {
     
     /**
      * 
-     *
+     */
     poll(): Promise<void> {
         return this.scheduledNum()
             .then(()=>this.randomTeams(2))
@@ -66,11 +65,3 @@ export class App {
     }
 }
 
-
-/**
-
-function getOneGames() {
-  games = db.query('game').where('visualized', false).orderBy('modified_time').desc().limit(20);
-}
-
-*/
