@@ -4,14 +4,12 @@ var express = require('express')
 var app = express()
 
 var getGamelog = function (req, res) {
+  let gameObj = null;  
   visapi.getGamefile()
-    .then((id)=>{
-    	visapi.markVisualized(id)
+    .then((gameObjects)=>{
+        return gameObjects.gamelog;
     })
-    .then((gamelog)=>{
-    	res.send(gamelog)
-    })
-    .catch(err=>{
+      .catch(err=>{
     	res.status(400)
     })
 }
