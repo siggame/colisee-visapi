@@ -1,4 +1,4 @@
-import * as db from "./dbUtil"
+import * as db from "./db"
 
 /** @module visapi */
 
@@ -22,7 +22,7 @@ export function getGamefile(): Promise<any> {
 }
 
 // Gets a gamefile which occured before some time
-export function getGamefileBeforeTime(time: any): Promise<any> {
+export function getGamefileBeforeTime(time: number): Promise<any> {
   return new Promise<any>((res, rej) =>{ 
     db.select('id', 'gamelog').from('game')
       .where('visualized', false)

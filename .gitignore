@@ -1,5 +1,7 @@
+# Editors & Environment
 .idea/
 .vscode/
+.env
 
 # NPM
 node_modules/

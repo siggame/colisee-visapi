@@ -1,6 +1,9 @@
-import * as visapi from "./visapi"
+import * as visapi from "./visapi";
+import * as dotenv from "dotenv";
+import * as express from "express";
+import * as vars from "./vars";
+dotenv.config();
 
-var express = require('express')
 var app = express()
 
 /**
@@ -25,6 +28,8 @@ app.get('/', function (req, res) {
  * @api {get} /beforeTime
  * @apiDescription Retrieve gamelog of most recent unvisualized game before some time from the database
  * @apiGroup Visapi
+ *
+ * @apiParam {number} time The time in milliseconds for which games are wanted before
  */
 app.get('/beforeTime', function (req, res) {
   let time = req.query.time;
