@@ -1,5 +1,5 @@
-import * as visapi from "./visapi";
 import * as dotenv from "dotenv";
+import * as visapi from "./visapi";
 import * as express from "express";
 import * as vars from "./vars";
 dotenv.config();
