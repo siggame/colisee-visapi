@@ -3,6 +3,11 @@ import * as visapi from "./visapi"
 var express = require('express')
 var app = express()
 
+/**
+ * @api {get} /
+ * @apiDescription Retrieve gamelog of most recent unvisualized finished game from the database
+ * @apiGroup Visapi
+ */
 app.get('/', function (req, res) {
   visapi.getGamefile()
     .then((gameObjects)=>{
@@ -16,7 +21,12 @@ app.get('/', function (req, res) {
     });
 })
 
-app.get('/api/beforeTime', function (req, res) {
+/**
+ * @api {get} /beforeTime
+ * @apiDescription Retrieve gamelog of most recent unvisualized game before some time from the database
+ * @apiGroup Visapi
+ */
+app.get('/beforeTime', function (req, res) {
   let time = req.query.time;
   if(time == null) {
     return res.status(400).send();

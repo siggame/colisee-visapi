@@ -2,10 +2,12 @@ import * as db from "./dbUtil"
 
 /** @module visapi */
 
+// Gets a gamefile
 export function getGamefile(): Promise<any> {
   return new Promise<any>((resolve, reject) => {
     db.select('id', 'gamelog').from('game')
       .where('visualized', false)
+      .andWhere('status', 'finished')
       .orderBy('modified_time', 'desc')
       .limit(1)
       .then(resolve)
@@ -19,11 +21,14 @@ export function getGamefile(): Promise<any> {
   });
 }
 
+// Gets a gamefile which occured before some time
 export function getGamefileBeforeTime(time: any): Promise<any> {
   return new Promise<any>((res, rej) =>{ 
     db.select('id', 'gamelog').from('game')
       .where('visualized', false)
-      .where('created_time', '<=', time)
+      .andWhere('status', 'finished')
+      .andWhere('created_time', '<', time)
+      .orderBy('modified_time', 'desc')
       .limit(1)
       .then(resolve)
       .catch(reject)
@@ -36,6 +41,7 @@ export function getGamefileBeforeTime(time: any): Promise<any> {
   });
 }
 
+// Marks a received game as visualized
 function markVisualized(gameObjects: any) : Promise<any> {
   return new Promise<any>((resolve, reject) => {
     db.query('game').whereIn('Id', gameIds=>gameObjects.id)
