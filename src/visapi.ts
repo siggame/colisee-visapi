@@ -6,7 +6,7 @@ export function getGamefile(): Promise<any> {
   return new Promise<any>((resolve, reject) => {
     db.select('id', 'gamelog').from('game')
       .where('visualized', false)
-      .orderBy('modified_time').desc()
+      .orderBy('modified_time', 'desc')
       .limit(1)
       .then(resolve)
       .catch(reject);
@@ -15,15 +15,32 @@ export function getGamefile(): Promise<any> {
         return null;
       }
       return markVisualized(gameObjects[0].id)
-        .then(()=>gameObjects[0])
+        .then(()=>gameObjects[0]);
+  });
+}
+
+export function getGamefileBeforeTime(time: any): Promise<any> {
+  return new Promise<any>((res, rej) =>{ 
+    db.select('id', 'gamelog').from('game')
+      .where('visualized', false)
+      .where('created_time', '<=', time)
+      .limit(1)
+      .then(resolve)
+      .catch(reject)
+  }).then((gameObjects)=>{
+      if (gameObjects.length == 0) {
+        return null;
+      }
+      return markVisualized(gameObjects[0].id)
+        .then(()=>gameObjects[0]);
   });
 }
 
 function markVisualized(gameObjects: any) : Promise<any> {
   return new Promise<any>((resolve, reject) => {
-    db.query('game').where('Id', gameObjects[0].id)
-    .update('visualized', true) 
-  })
+    db.query('game').whereIn('Id', gameIds=>gameObjects.id)
+    .update('visualized', true); 
+  });
 }
 
 
