@@ -5,7 +5,7 @@ import * as db from "./db"
 // Gets a gamefile
 export function getGamefile(): Promise<any> {
   return new Promise<any>((resolve, reject) => {
-    db.select('id', 'gamelog').from('game')
+    db.query.select('id', 'gamelog').from('game')
       .where('visualized', false)
       .andWhere('status', 'finished')
       .orderBy('modified_time', 'desc')
@@ -24,7 +24,7 @@ export function getGamefile(): Promise<any> {
 // Gets a gamefile which occured before some time
 export function getGamefileBeforeTime(time: number): Promise<any> {
   return new Promise<any>((resolve, reject) =>{ 
-    db.select('id', 'gamelog').from('game')
+    db.query.select('id', 'gamelog').from('game')
       .where('visualized', false)
       .andWhere('status', 'finished')
       .andWhere('created_time', '<', time)
@@ -78,4 +78,4 @@ export function checkPrioriy(gameNum: number): Promise<void> {
 	return new Promise<void>((resolve, reject) => {
 		db.query('Priority').where('Serial', gameNum)
 	})
-}
+}*/
