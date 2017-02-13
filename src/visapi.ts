@@ -23,7 +23,7 @@ export function getGamefile(): Promise<any> {
 
 // Gets a gamefile which occured before some time
 export function getGamefileBeforeTime(time: number): Promise<any> {
-  return new Promise<any>((res, rej) =>{ 
+  return new Promise<any>((resolve, reject) =>{ 
     db.select('id', 'gamelog').from('game')
       .where('visualized', false)
       .andWhere('status', 'finished')
