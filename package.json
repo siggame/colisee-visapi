@@ -10,6 +10,7 @@
     "build": "tsc",
     "setup": "npm install",
     "quick-test": "mocha test/",
+    "pretest": "npm run build",
     "test": "npm run quick-test"
   },
   "repository": {
