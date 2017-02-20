@@ -9,7 +9,7 @@
     "start": "npm run quick-start",
     "build": "tsc",
     "setup": "npm install",
-    "quick-test": "mocha test/",
+    "quick-test": "mocha --colors test/",
     "pretest": "npm run build",
     "test": "npm run quick-test",
     "dockerUp": "docker pull siggame/colisee-db"
