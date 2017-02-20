@@ -1,8 +1,9 @@
 import * as dotenv from "dotenv";
+dotenv.config();
+
 import * as visapi from "./visapi";
 import * as express from "express";
 import * as vars from "./vars";
-dotenv.config();
 
 var app = express()
 
@@ -15,16 +16,18 @@ var app = express()
  * @apiSuccess {} gamelog Gamelog of most recent unvisualized finished game 
  */
 app.get('/', function (req, res) {
-  visapi.getGamefile()
-    .then((gameObjects)=>{
-      if(gameObjects == null) {
-        res.status(204).send('Gamelog Not Found');
-      }
-      res.send(gameObjects.gamelog);
-    })
-    .catch(err=>{
-      res.status(400).send();
-    });
+    console.log("getting log")
+    visapi.getGamefile()
+        .then((gameObjects) => {
+            if (gameObjects == null) {
+                res.status(204).send('Gamelog Not Found');
+            }
+            console.log("log retrieved")
+            res.send(gameObjects.gamelog);
+        })
+        .catch(err => {
+            res.status(400).send();
+        });
 })
 
 /**
@@ -38,20 +41,20 @@ app.get('/', function (req, res) {
  * @apiSuccess {} gamelog Gamelog of most recent unvisualized finished game before some time
  */
 app.get('/beforeTime', function (req, res) {
-  let time = req.query.time;
-  if(time == null) {
-    return res.status(400).send();
-  }
-  visapi.getGamefileBeforeTime(time)
-  .then((gameObjects)=>{
-    if(gameObjects == null) {
-      res.status(204).send('Gamelog Not Found');
+    let time = req.query.time;
+    if (time == null) {
+        return res.status(400).send();
     }
-    res.send(gameObjects.gamelog);
-  })
-  .catch(err=>{
-    res.status(400).send(err);
-  });
+    visapi.getGamefileBeforeTime(time)
+        .then((gameObjects) => {
+            if (gameObjects == null) {
+                res.status(204).send('Gamelog Not Found');
+            }
+            res.send(gameObjects.gamelog);
+        })
+        .catch(err => {
+            res.status(400).send(err);
+        });
 })
 
 
