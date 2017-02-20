@@ -1,4 +1,4 @@
-import * as chai from "chai"
+import * as chai from "chai";
 
 export default function() {
 

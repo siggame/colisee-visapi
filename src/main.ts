@@ -16,11 +16,13 @@ var app = express()
  * @apiSuccess {} gamelog Gamelog of most recent unvisualized finished game 
  */
 app.get('/', function (req, res) {
+    console.log("getting log")
     visapi.getGamefile()
         .then((gameObjects) => {
             if (gameObjects == null) {
                 res.status(204).send('Gamelog Not Found');
             }
+            console.log("log retrieved")
             res.send(gameObjects.gamelog);
         })
         .catch(err => {

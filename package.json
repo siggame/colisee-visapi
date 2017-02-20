@@ -11,7 +11,8 @@
     "setup": "npm install",
     "quick-test": "mocha test/",
     "pretest": "npm run build",
-    "test": "npm run quick-test"
+    "test": "npm run quick-test",
+    "dockerUp": "docker pull siggame/colisee-db"
   },
   "repository": {
     "type": "git",
