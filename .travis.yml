@@ -3,7 +3,12 @@ sudo: required
 services:
   - docker
 
-language: nodejs
+before_script:
+  - docker build -t visapi .
+  - docker run --name visapi-db --publish 5433:5432 --detach siggame/colisee-db
 
 script:
-  - docker build . --tag visapi
+  - docker run --rm -e POSTGRES_PORT=5433 --network host visapi npm run test
+
+after_script:
+  - docker stop tournament-db
