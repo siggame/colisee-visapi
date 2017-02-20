@@ -7,7 +7,7 @@ export default function() {
       chai.expect(true).is.true;
       chai.expect(false).is.false;
     })
-    it('should not be sane', function(){
+    it('should not be insane', function(){
       chai.expect(true).is.not.false;
       chai.expect(false).is.not.true;
     })
