@@ -5,5 +5,4 @@
 ### Docker
 [colisee-visapi](https://hub.docker.com/r/siggame/colisee-visapi/) 
 
-### Documentation
-- [API](http://siggame.io/colisee-visapi/api)
+### [API Docs](http://siggame.io/colisee-visapi/api)
