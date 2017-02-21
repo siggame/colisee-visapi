@@ -13,7 +13,7 @@ var app = express()
  * @apiGroup Visapi
  * @apiDescription Retrieve gamelog of most recent unvisualized finished game from the database
  * 
- * @apiSuccess {} gamelog Gamelog of most recent unvisualized finished game 
+ * @apiSuccess {string} gamelog Gamelog of most recent unvisualized finished game 
  */
 app.get('/', function (req, res) {
     console.log("getting log")
@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
  *
  * @apiParam {number} time The time in milliseconds for which games are wanted before
  * 
- * @apiSuccess {} gamelog Gamelog of most recent unvisualized finished game before some time
+ * @apiSuccess {string} gamelog Gamelog of most recent unvisualized finished game before some time
  */
 app.get('/beforeTime', function (req, res) {
     let time = req.query.time;
