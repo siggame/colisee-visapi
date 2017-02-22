@@ -10,9 +10,11 @@
     "build": "tsc",
     "setup": "npm install",
     "predocs": "npm run build",
-    "docs": "npm run docs:api && npm run docs:readme",
-    "docs:api": "apidoc --input src/ --output docs/api/",
-    "docs:readme": "cp README.md docs/",
+    "docs": "npm run quick-docs",
+    "quick-docs": "npm run quick-docs:ts && npm run quick-docs:api && npm run quick-docs:readme",
+    "quick-docs:api": "apidoc --input src/ --output docs/api/",
+    "quick-docs:ts": "typedoc --out docs/ts/",
+    "quick-docs:readme": "cp README.md docs/",
     "quick-test": "mocha --colors test/",
     "pretest": "npm run build",
     "test": "npm run quick-test"
@@ -37,7 +39,8 @@
     "@types/node": "^7.0.5",
     "apidoc": "^0.17.5",
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "typedoc": "^0.5.7"
   },
   "dependencies": {
     "apidoc": "^0.17.5",
