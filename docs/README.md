@@ -5,3 +5,4 @@
 ### [Docker](https://hub.docker.com/r/siggame/colisee-visapi/) 
 ### [GitHub](https://github.com/siggame/colisee-visapi) 
 ### [API Docs](http://siggame.io/colisee-visapi/api)
+### [Typescript Docs](http://siggame.io/colisee-visapi/ts)
