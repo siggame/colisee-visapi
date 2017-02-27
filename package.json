@@ -17,7 +17,8 @@
     "quick-docs:readme": "cp README.md docs/",
     "quick-test": "mocha --colors test/",
     "pretest": "npm run build",
-    "test": "npm run quick-test"
+    "test": "npm run quick-test",
+    "clean": "rm -f src/*.js && rm -f src/*.js.map && rm -f src/**/*.js && rm -f src/**/*.js.map && rm -f test/*.js && rm -f test/*.js.map && rm -f test/**/*.js && rm -f test/**/*.js.map && rm -r -f node_modules/"
   },
   "repository": {
     "type": "git",
