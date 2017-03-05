@@ -7,7 +7,6 @@
 # NodeJS & NPM
 node_modules/
 
-
 # Git
 .git/
 .gitignore
