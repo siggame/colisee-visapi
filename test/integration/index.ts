@@ -10,7 +10,6 @@ export default function (): void {
       return new Promise((resolve, reject) => {
         db.query.raw("SELECT 1+1")
           .then(resolve)
-          .catch(err => chai.expect(err).to.not.exist)
       })
     })
   })
