@@ -15,4 +15,4 @@ npm-debug.log
 
 docs/
 
-ubuntu-*-cloudimg-console.log
+*.log
