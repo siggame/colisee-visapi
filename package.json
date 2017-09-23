@@ -47,6 +47,7 @@
     "typedoc": "^0.5.7"
   },
   "dependencies": {
+    "@siggame/colisee-lib": "^0.2.5",
     "apidoc": "^0.17.5",
     "dotenv": "^4.0.0",
     "express": "^4.14.1",
