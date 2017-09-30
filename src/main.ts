@@ -24,13 +24,13 @@ app.get('/api/gamelog', function (req, res) {
     const time: number = req.query.time;
     
     // if time was given get gamelog using time
-    let p = _.isNil(time) ? visapi.getGamefile() : visapi.getGamefileBeforeTime(time)
-
-    p.then((gameObjects) => {
-            if (_.isNil(gameObjects)) {
+    // let p = _.isNil(time) ? visapi.getGamelogURL() : visapi.getGamefileURLBeforeTime(time)
+    let p = visapi.getGamelogURL()
+    p.then((url) => {
+            if (_.isNil(url)) {
                 return res.status(204).send('Gamelog Not Found');
             }
-            res.status(200).send(gameObjects.gamelog);
+            res.status(200).send(url);
         })
         .catch(err => {
             res.status(400).send();

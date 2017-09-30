@@ -1,54 +1,44 @@
-import * as db from "./db"
+import { db } from "@siggame/colisee-lib";
 
-// Gets a gamefile
-export function getGamefile(): Promise<any> {
+/*
+// Gets the url of a gamfile
+export function getGamefileURL(): Promise<any> {
   return new Promise<any>((resolve, reject) => {
-    db.query.select('id', 'gamelog').from('game')
-      .where('visualized', false)
-      .andWhere('status', 'finished')
+    db.connection("games").select('log_url')
+      .where('status', 'finished')
       .orderBy('modified_time', 'desc')
       .limit(1)
       .then(resolve)
       .catch(reject);
-  }).then((gameObjects)=>{
-      if (gameObjects.length == 0) {
-        return null;
-      }
-      return markVisualized(gameObjects)
-        .then(()=>gameObjects[0]);
-  });
+  })
+}
+/**/
+
+export async function getGamelogURL(): Promise<string> {
+  const now = new Date()
+  const earlier = new Date(new Date().setHours(now.getHours() - 1));
+  const games = await db.connection("games")
+    .where({ 'status': "finished"})
+    .whereBetween("created_at", [earlier.toISOString(), now.toISOString()])
+    .orderByRaw("RANDOM()")
+    .then(db.rowsToGames)
+  return games[0].logUrl
 }
 
+/*
 // Gets a gamefile which occured before some time
-export function getGamefileBeforeTime(time: number): Promise<any> {
+export function getGamefileURLBeforeTime(time: number): Promise<any> {
   return new Promise<any>((resolve, reject) =>{ 
-    db.query.select('id', 'gamelog').from('game')
-      .where('visualized', false)
-      .andWhere('status', 'finished')
+    db.connection("games").select('id', 'log_url')
+      .where('status', 'finished')
       .andWhere('created_time', '<', time)
       .orderBy('modified_time', 'desc')
       .limit(1)
       .then(resolve)
       .catch(reject)
-  }).then((gameObjects)=>{
-      if (gameObjects.length == 0) {
-        return null;
-      }
-      return markVisualized(gameObjects[0].id)
-        .then(()=>gameObjects[0]);
-  });
+  })
 }
-
-// Marks a received game as visualized
-export function markVisualized(gameObjects) : Promise<any> {
-  return new Promise<any>((resolve, reject) => {
-    db.query('game').whereIn('id', gameObjects.map(go=>go.id))
-    .update('visualized', true)
-    .then(resolve)
-    .catch(reject) 
-  });
-}
-
+/**/
 
 /*
 export function getNNewGamelogs(num: number): Promise<any> {

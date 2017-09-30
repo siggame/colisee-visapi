@@ -1,5 +1,7 @@
+import * as dotenv from "dotenv"
+dotenv.config()
 import * as chai from "chai"
-import * as db from "../../src/db"
+import { db } from "@siggame/colisee-lib";
 import visapiTest from "./visapi"
 
 
@@ -8,7 +10,7 @@ export default function (): void {
     it("Should connect to the database", function () {
       this.retries(5);
       return new Promise((resolve, reject) => {
-        db.query.raw("SELECT 1+1")
+        db.connection.raw("SELECT 1+1")
           .then(resolve)
       })
     })

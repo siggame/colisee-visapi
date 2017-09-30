@@ -1,4 +1,4 @@
-import * as db from "../../src/db";
+import { db } from "@siggame/colisee-lib";
 import * as visapi from "../../src/visapi";
 import * as chai from "chai";
 import * as fs from "fs";
@@ -8,32 +8,23 @@ export default function() : void {
   describe("Visapi Tests", function(){
     before("Add testing data to database", function() {
       return new Promise((resolve, reject)=>{
-        fs.readFile(path.join(__dirname, "10087-Saloon-8aca7.json"),(err, data)=>{
-            db.query("game").insert({
-            status: 'finished',
-            gamelog: data,
-            visualized: false
-          }).then(resolve)
-            .catch(reject);
-        })
+        const test_game = { 
+          status: "finished",
+          win_reason: "Better",
+          lose_reason: "Worse",
+          log_url: "Tacocat",
+        }
+        db.connection('games').insert(test_game).then(resolve).catch(reject)
       })
     })
-    it("Should retrieve a gamefile", function() {
-      return visapi.getGamefile()
+    it("Should retrieve a url", function() {
+      return visapi.getGamelogURL()
       .then(gamefile=>{
         chai.expect(gamefile).to.exist;
       })
     })
-    it("Game should be visualized", function() {
-      return new Promise((resolve, reject) => {
-        db.query("game")
-          .where('visualized', true)
-          .then(rows=>{
-            chai.expect(rows).length.above(0)
-            return resolve();
-          })
-          .catch(reject);
-      })
+    after("Remove testing data", function() {
+      db.connection("games").delete().where("logUrl", "Tacocat")
     })
   })
 }
